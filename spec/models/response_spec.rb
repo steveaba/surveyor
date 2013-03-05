@@ -34,12 +34,6 @@ describe Response, "when saving a response" do
     @response.correct?.should be_false
   end
   
-  it "should be in order by created_at" do
-    @response.response_set.should_not be_nil
-    response2 = Factory(:response, :question => Factory(:question), :answer => Factory(:answer), :response_set => @response.response_set, :created_at => (@response.created_at + 1))
-    Response.all.should == [@response, response2]
-  end
-  
   it "should protect api_id, timestamps" do
     saved_attrs = @response.attributes
     if defined? ActiveModel::MassAssignmentSecurity::Error
