@@ -3,11 +3,11 @@ module Surveyor
     module SurveySectionMethods
       def self.included(base)
         # Associations
-        base.send :has_many, :questions, :order => "display_order ASC", :dependent => :destroy
+        base.send :has_many, :questions, :dependent => :destroy
         base.send :belongs_to, :survey
 
         # Scopes
-        base.send :default_scope, :order => "display_order ASC"
+        base.send :default_scope, :order => "#{base.quoted_table_name}.display_order ASC"
         base.send :scope, :with_includes, { :include => {:questions => [:answers, :question_group, {:dependency => :dependency_conditions}]}}
         
         @@validations_already_included ||= nil

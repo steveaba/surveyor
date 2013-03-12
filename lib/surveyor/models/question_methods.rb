@@ -12,7 +12,7 @@ module Surveyor
         base.send :belongs_to, :correct_answer, :class_name => "Answer", :dependent => :destroy
 
         # Scopes
-        base.send :default_scope, :order => "display_order ASC"
+        base.send :default_scope, :order => "#{base.quoted_table_name}.display_order ASC"
 
         @@validations_already_included ||= nil
         unless @@validations_already_included
